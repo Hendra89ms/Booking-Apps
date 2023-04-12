@@ -1,0 +1,10 @@
+@media (min-width: 640px) {
+    .overflow-x-auto {
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scroll-padding: 1rem;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+    }
+}

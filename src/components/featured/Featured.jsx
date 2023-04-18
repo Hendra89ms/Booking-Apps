@@ -62,7 +62,7 @@ export default function Featured() {
     return (
 
         <div className='flex w-screen justify-center items-center sm:my-5 mb-7 sm:mb-0'>
-            <div className='w-screen px-2 sm:px-0 sm:w-[1024px] flex flex-col justify-center items-center relative'>
+            <div className='w-screen px-2 sm:px-0 sm:w-[1024px] flex flex-col justify-center items-center relative '>
 
                 <Slider ref={sliderRef} {...settings} className="w-full">
 

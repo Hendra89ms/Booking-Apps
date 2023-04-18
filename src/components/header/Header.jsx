@@ -6,9 +6,6 @@ import 'react-date-range/dist/styles.css'; // main css file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { format } from 'date-fns';
 import { useNavigate } from 'react-router-dom'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
-
 
 
 export default function Header({ type }) {
@@ -88,66 +85,55 @@ export default function Header({ type }) {
         setClickInput(false)
     }
 
+    const data = {
+        navbar: ['Stays', 'Flight', 'Car Rentals', 'Attractions', 'Airport Taxis'],
+        icon: [faBed, faPlane, faCar, faTaxi, faCalendarDays, faPerson],
+    };
+
+    const [activeIndex, setActiveIndex] = useState(0);
+
+    const changeBorder = (index) => {
+        setActiveIndex(index);
+    };
+
+
     return (
-        <div className='w-screen h-full'>
+        <div className=''>
             <div className={`bg-[#003580] text-white flex justify-center ${type === "list" ? "h-[100px]" : ""} relative pl-[10px]`}>
-                <div className='w-full max-w-[1024px] text-sm mt-[10px] mb-[25px] flex-col md:hidden justify-center pr-2'>
+                <div className='w-full sm:max-w-[1024px] text-sm sm:text-[15px] mt-[10px] mb-[25px]  flex-col  pr-2'>
 
-                    <Swiper watchOverflow={true} slidesPerView={2.6} className=' flex items-center gap-10 ' direction='horizontal' draggable={true} >
+                    <div className='flex items-center sm:mb-10'>
 
-                        <SwiperSlide className='flex gap-[7px] text-sm md:text-lg items-center'>
+                        <div className='flex w-full sm:gap-6 gap-0  flex-wrap sm:text-[16px] text-[14px] bg-[#003580] sm:h-[50px] h-[90px]'>
+                            {
+                                data.navbar.map((val, ind) => (
 
-                            <div className='flex gap-[7px] justify-center items-center border-solid border-white border-[1px] rounded-[20px] p-2 cursor-pointer w-[80px]'>
-                                <FontAwesomeIcon icon={faBed} />
-                                <span>Stays</span>
-                            </div>
+                                    <div key={ind}
+                                        className={`${activeIndex === ind ? 'border-solid border-white border-[1px] sm:py-2 ' : ''}  flex justify-center items-center gap-1 text-white rounded-md cursor-pointer sm:w-[130px] w-[110px] h-[35px] sm:h-[45px]`}
+                                        onClick={() => changeBorder(ind)}
+                                    >
+                                        <FontAwesomeIcon icon={data.icon[ind]} />
+                                        <h1>{val}</h1>
+                                    </div>
 
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2 cursor-pointer w-[80px] '>
-                                <FontAwesomeIcon icon={faPlane} />
-                                <span>Flight</span>
-                            </div>
-                        </SwiperSlide>
-
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center rounded-[20px] p-2 cursor-pointer w-[120px] '>
-                                <FontAwesomeIcon icon={faCar} />
-                                <span className='flex'> Car Rentals </span>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2 cursor-pointer w-[120px] '>
-                                <FontAwesomeIcon icon={faBed} />
-                                <span>Attractions</span>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2 cursor-pointer w-[120px] '>
-                                <FontAwesomeIcon icon={faTaxi} />
-                                <span>Airport Taxis</span>
-                            </div>
-                        </SwiperSlide>
-                    </Swiper>
-
+                                ))
+                            }
+                        </div>
+                    </div>
 
                     {
                         type !== "list" && (
                             <>
-                                <h1 className="font-bold text-2xl md:text-3xl my-[20px]">
+                                <h1 className="font-bold text-2xl md:text-3xl my-[20px] ">
                                     A lifetime of discounts? It's Genius.
                                 </h1>
 
-                                <p className='mb-[20px]'>Get rewarded for your travels – unlock instant savings of 10% or more with a free Lamabooking account </p>
+                                <p className='mb-[20px] sm:mb-[40px]'>Get rewarded for your travels – unlock instant savings of 10% or more with a free Lamabooking account </p>
 
-                                <button className='bg-[#0071c2] hover:bg-[#769fd8] duration-300 p-[10px] font-medium cursor-pointer'> Sign in / Register</button>
+                                <button className='bg-[#0071c2] hover:bg-[#769fd8] duration-300 p-[10px] font-medium cursor-pointer sm:mb-12'> Sign in / Register</button>
 
 
-                                <div className='bg-white border-[3px] border-solid border-[#febb02] rounded-md flex items-center mt-5'>
+                                <div className='bg-white border-[3px] border-solid border-[#febb02] rounded-md flex items-center mt-5 md:hidden'>
 
                                     <div className='flex items-center gap-[10px] pl-2' onClick={handleClickInput}>
                                         <FontAwesomeIcon icon={faBed} color={'gray'} />
@@ -284,71 +270,8 @@ export default function Header({ type }) {
 
 
                                 </div>
-                            </>
-                        )
-                    }
 
-
-
-                </div>
-
-                <div className='w-full max-w-[1024px] mt-[10px] mb-[80px] flex-col hidden md:block'>
-
-                    <Swiper watchOverflow={true} slidesPerView={5} className=' flex items-center ' direction='horizontal' draggable={true} >
-
-                        <SwiperSlide className='flex gap-[40px] text-sm md:text-lg items-center'>
-
-                            <div className='flex gap-[7px] justify-center items-center border-solid border-white border-[1px] rounded-[20px] p-2.5 cursor-pointer w-[100px]'>
-                                <FontAwesomeIcon icon={faBed} />
-                                <span>Stays</span>
-                            </div>
-
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2.5 cursor-pointer w-[100px] '>
-                                <FontAwesomeIcon icon={faPlane} />
-                                <span>Flight</span>
-                            </div>
-                        </SwiperSlide>
-
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2.5 cursor-pointer w-[150px] '>
-                                <FontAwesomeIcon icon={faCar} />
-                                <span className='flex'> Car Rentals </span>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2.5 cursor-pointer w-[100px] '>
-                                <FontAwesomeIcon icon={faBed} />
-                                <span>Attractions</span>
-                            </div>
-                        </SwiperSlide>
-
-                        <SwiperSlide>
-                            <div className='flex gap-[7px] justify-center items-center border-solid  rounded-[20px] p-2.5 cursor-pointer w-[150px] '>
-                                <FontAwesomeIcon icon={faTaxi} />
-                                <span>Airport taxis</span>
-                            </div>
-                        </SwiperSlide>
-                    </Swiper>
-
-
-                    {
-                        type !== "list" && (
-                            <>
-                                <h1 className="font-bold text-2xl md:text-3xl my-[20px]">
-                                    A lifetime of discounts? It's Genius.
-                                </h1>
-
-                                <p className='mb-[20px]'>Get rewarded for your travels – unlock instant savings of 10% or more with a free Lamabooking account </p>
-
-                                <button className='bg-[#0071c2] hover:bg-[#769fd8] duration-300 p-[10px] font-medium cursor-pointer'> Sign in / Register</button>
-
-
-                                <div className='bg-white border-[3px] border-solid border-[#febb02] flex items-center justify-around text-[lightgray] p-[10px] rounded-[5px]  w-full max-w-[1024px] absolute z-10 bottom-[-30px]'>
+                                <div className='bg-white border-[3px] border-solid border-[#febb02]  items-center justify-around text-[lightgray] p-[10px] rounded-[5px]  w-full max-w-[1024px] absolute z-10 bottom-[-30px] md:flex hidden'>
 
                                     <div className='flex items-center gap-[10px] '>
                                         <FontAwesomeIcon icon={faBed} />
@@ -462,7 +385,12 @@ export default function Header({ type }) {
                             </>
                         )
                     }
+
+
+
                 </div>
+
+
             </div>
         </div>
     );

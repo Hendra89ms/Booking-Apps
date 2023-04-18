@@ -4,6 +4,7 @@ import { Home, List, Hotel } from './pages'
 import { Spinner } from './components'
 import Coba from './pages/coba/Coba';
 
+
 export default function App() {
 
   return (
